@@ -15,10 +15,15 @@ var client = new twitterNPM({
 
 if (process.argv[2] == "my-tweets") {
 	console.log("Test")
-var params = {screen_name: 'karunashi', count: 20};
+var params = {screen_name: 'karunashi'};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
-    console.log(tweets[2]);
+    for (var i = 0; i < 20; i++) {
+    	console.log("-----------------")
+    	console.log(tweets[i].created_at)
+    	console.log(tweets[i].text)
+    	console.log("-----------------")
+    }
   }
   else {
   	console.log(error)
