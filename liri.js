@@ -121,3 +121,10 @@ request("http://www.omdbapi.com/?t=mr.nobody&y=&plot=short&r=json", function(err
 // if (process.argv[2] == "do-what-it-says") {
 
 // }
+
+if (process.argv[2] == undefined) {
+	console.log("\x1b[1m \x1b[37m", "Access denied. Invalid command. Please type "+'\x1b[33m'+" help"+"\x1b[1m \x1b[37m"+" for further assistance.")
+}
+if (process.argv[2] == "help") {
+	console.log("You may type one of the following commands: "+ "\n" + "\x1b[36m", "spotify-this-song (search query)" + "\n" + "\x1b[35m", "movie-this (search query)" + "\n" + "\x1b[32m","do-what-it-says")
+}
