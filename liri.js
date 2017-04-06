@@ -45,7 +45,13 @@ if (process.argv[2] == "spotify-this-song") {
 	        console.log('Error occurred: ' + err);
 	        return;
 	    }
-	 	console.log(data.tracks.items[0].album.artists[0].name)
+	 	console.log("Artist(s) Name: "+data.tracks.items[0].album.artists[0].name);
+	 	console.log("Song Name: "+data.tracks.items[0].name);
+	 	console.log("Album Name: "+data.tracks.items[0].album.name);
+	 	console.log("Spotify Link: "+data.tracks.items[0].album.external_urls.spotify);
+	 	console.log("Preview Link: "+data.tracks.items[0].preview_url);
+	 	console.log(data.tracks.items[0]);
+
 	    // Do something with 'data' 
 	});
 }
