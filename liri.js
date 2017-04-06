@@ -15,6 +15,9 @@ var client = new twitterNPM({
 var spotifyNPM = require('spotify');
 var search = process.argv[3]
 
+// For OMDB
+var request = require('request');
+
 	////// Inputs //////
 
 // When the user inputs my-tweets, it will run this:
@@ -62,14 +65,59 @@ if (process.argv[2] == "spotify-this-song" && !search == " ") {
 	}
 	});
 }
-else {
-spotifyNPM.search({ type: 'track', query: 'The Sign,  Ace of Base' }, function(err, data) {
+
+// If the variable search is undefined and the command for spotify is executed, it will run this:
+else if (process.argv[2] == "spotify-this-song" && search == undefined) {
+spotifyNPM.search({ type: 'track', query: 'The Sign, Ace of Base' }, function(err, data) {
 	    console.log("Artist Name: "+data.tracks.items[0].artists[0].name);
 	 	console.log("Song Name: "+data.tracks.items[0].name);
 	 	console.log("Album Name: "+data.tracks.items[0].album.name);
 	 	console.log("Spotify Link: "+data.tracks.items[0].album.external_urls.spotify);
 	 	console.log("Preview Link: "+data.tracks.items[0].preview_url);
-    // Do something with 'data' 
 });
 }
 
+// If user inputs "movie this" and searches for a movie, it will show this:
+if (process.argv[2] == "movie-this" && !search == " ") {
+	request("http://www.omdbapi.com/?t="+search+"&y=&plot=short&r=json", function(error, response, body) {
+
+	  if (!error) {
+	    console.log("Title of the Movie: "+JSON.parse(body).Title);
+	    console.log("Release Year: "+JSON.parse(body).Year);
+	    console.log("IMDB Movie Rating: "+JSON.parse(body).imdbRating+"/10");
+	    console.log("Movie was produced in: "+JSON.parse(body).Country);
+	    console.log("Primary Language of the film: "+JSON.parse(body).Language);
+	    console.log("Plot: "+JSON.parse(body).Plot);
+	    console.log("Actors/Actresses: "+JSON.parse(body).Actors);
+	    console.log("Rotten Tomatoes Rating: "+JSON.parse(body).Ratings[1].Source);
+	    console.log("Rotten Tomatoes Link: "+JSON.parse(body).Ratings[1].Value);
+	  }
+	  else if (error) {
+	  	console.log(error)
+	  }
+	});
+}
+
+// If user inputs "movie this," and the search variable is undefined, it automatically show this by default:
+else if (process.argv[2] == "movie-this" && search == undefined) {
+request("http://www.omdbapi.com/?t=mr.nobody&y=&plot=short&r=json", function(error, response, body) {
+	if (!error) {
+		 console.log("Title of the Movie: "+JSON.parse(body).Title);
+	    console.log("Release Year: "+JSON.parse(body).Year);
+	    console.log("IMDB Movie Rating: "+JSON.parse(body).imdbRating+"/10");
+	    console.log("Movie was produced in: "+JSON.parse(body).Country);
+	    console.log("Language(s): "+JSON.parse(body).Language);
+	    console.log("Plot: "+JSON.parse(body).Plot);
+	    console.log("Actors/Actresses: "+JSON.parse(body).Actors);
+	    console.log("Rotten Tomatoes Rating: "+JSON.parse(body).Ratings[1].Source);
+	    console.log("Rotten Tomatoes Link: "+JSON.parse(body).Ratings[1].Value);
+	  }
+	  else if (error) {
+	  	console.log(error)
+	  }
+});
+}
+
+// if (process.argv[2] == "do-what-it-says") {
+
+// }
