@@ -118,9 +118,15 @@ request("http://www.omdbapi.com/?t=mr.nobody&y=&plot=short&r=json", function(err
 });
 }
 
-// if (process.argv[2] == "do-what-it-says") {
-
-// }
+if (process.argv[2] == "do-what-it-says") {
+var fs = require("fs");
+fs.readFile("random.txt", "utf8", function(error, data) {
+  var splitData = data.split(",");
+  console.log(splitData);
+  process.argv[2] = splitData[0];
+  process.argv[3] = splitData[1];
+});
+}
 
 if (process.argv[2] == undefined) {
 	console.log("\x1b[1m \x1b[37m", "Access denied. Invalid command. Please type "+'\x1b[33m'+" help"+"\x1b[1m \x1b[37m"+" for further assistance.")
