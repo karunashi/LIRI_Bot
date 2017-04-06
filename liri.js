@@ -11,8 +11,16 @@ var client = new twitterNPM({
 		access_token_key: twitKey.access_token_key,
 		access_token_secret: twitKey.access_token_secret
 	});
+// For spotify and movie search.
+var spotifyNPM = require('spotify');
+var search = process.argv[3]
 
 
+
+	////// Inputs //////
+
+
+// When the user inputs my-tweets in their 
 if (process.argv[2] == "my-tweets") {
 	console.log("Test")
 var params = {screen_name: 'karunashi'};
@@ -29,5 +37,15 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   	console.log(error)
   }
 });
+}
 
+if (process.argv[2] == "spotify-this-song") {
+	spotifyNPM.search({ type: 'track', query: search }, function(err, data) {
+	    if ( err ) {
+	        console.log('Error occurred: ' + err);
+	        return;
+	    }
+	 	console.log(data.tracks.items[0].album.artists[0].name)
+	    // Do something with 'data' 
+	});
 }
