@@ -110,8 +110,8 @@ function movieSearch() {
             console.log("Primary Language of the film: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors/Actresses: " + JSON.parse(body).Actors);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Source);
-            console.log("Rotten Tomatoes Link: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Rotten Tomatoes Source: " + JSON.parse(body).Ratings[1].Source);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
         } else if (error) {
             console.log(error)
         }
@@ -133,8 +133,8 @@ function movieNoSearch() {
             console.log("Language(s): " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors/Actresses: " + JSON.parse(body).Actors);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Source);
-            console.log("Rotten Tomatoes Link: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Rotten Tomatoes Rating2: " + JSON.parse(body).Ratings[1].Source);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
         } else if (error) {
             console.log(error)
         }
