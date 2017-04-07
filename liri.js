@@ -38,6 +38,14 @@ function tweetit()
             console.log(error)
         }
     });
+    client.post('statuses/update', {status: 'I am a tweet'}, function(error, tweet, response) {
+  if (!error) {
+    console.log(tweet);
+  }
+  if (error) {
+    console.log(error); // To ensure that my access token for "read-only" permissions is working.
+  }
+});
 }
 
 // When the user inputs spotify-this-song, it will run this:
@@ -136,22 +144,20 @@ function movieNoSearch() {
 if (process.argv[2] == "do-what-it-says") {
     var fs = require("fs");
     fs.readFile("random.txt", "utf8", function(error, data) {
-        var splitData = data.split(",");
-        console.log(splitData);
-        var inputOne = splitData[0];
-        search = splitData[1];
-        if (inputOne == "spotify-this-song") {
-        	spotifySongSearch(search);
-        }
-        else if (inputOne == "my-tweets") {
-        	tweetit();
-        }
-        else if(inputOne == "movie-this") {
-        	movieSearch(search);
-        }
-    });
-
+    var splitData = data.split(",");
+    // console.log(splitData); // Check to see what's split. 
+    var inputOne = splitData[0];
+    search = splitData[1];
+    if (inputOne == "spotify-this-song") {
+        spotifySongSearch(search); //spotifySongSearch function runs here
+    } else if (inputOne == "my-tweets") {
+        tweetit(); // tweetit function runs here (no process.argv[3])
+    } else if (inputOne == "movie-this") {
+        movieSearch(search); //movieSearch function runs here
+    }
+});
 }
+
 
 if (process.argv[2] == undefined) {
     console.log("\x1b[1m \x1b[37m", "Access denied. Invalid command. Please type " + '\x1b[33m' + " help" + "\x1b[1m \x1b[37m" + " for further assistance.")
