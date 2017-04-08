@@ -100,7 +100,7 @@ if (process.argv[2] == "movie-this" && !search == " ") {
 }
 
 function movieSearch() {
-    request("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&r=json", function(error, response, body) {
+    request("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&r=json&tomatoes=true", function(error, response, body) {
 
         if (!error) {
             console.log("Title of the Movie: " + JSON.parse(body).Title);
@@ -110,7 +110,7 @@ function movieSearch() {
             console.log("Primary Language of the film: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors/Actresses: " + JSON.parse(body).Actors);
-            console.log("Rotten Tomatoes Source: " + JSON.parse(body).Ratings[1].Source);
+            console.log("Rotten Tomatoes Source: " + JSON.parse(body).tomatoURL);
             console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
         } else if (error) {
             console.log(error)
